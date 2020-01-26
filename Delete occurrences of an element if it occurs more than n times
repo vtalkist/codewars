@@ -1,0 +1,17 @@
+#include <stddef.h>
+
+const int* delete_nth(size_t szin, int order[], int max_e, size_t *szout)
+{
+	int e_count = 0, new_size = 0, *new_arr = malloc(szin * sizeof(int));
+	for (int i = 0; i < szin; i++)
+	{
+		for (int a = 0; a < new_size; a++)
+			if (order[i] == new_arr[a])
+				e_count++;
+		if (e_count < max_e) 
+			new_arr[new_size++] = order[i];
+		e_count = 0;
+	}
+	*szout = new_size;
+	return realloc(new_arr, sizeof(int) * new_size);
+}
